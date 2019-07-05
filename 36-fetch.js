@@ -2,10 +2,20 @@
 
 //Fetch y peticiones a servicios apis rest
 
-var div_usuarios = document.querySelector("#usuarios");
-var div_janet = document.querySelector("janet");
 
-    getUsuarios()
+var div_usuarios = document.querySelector("#usuarios");
+var div_janet = document.querySelector("#janet");
+    
+function getUsers(){
+    return fetch('https://reqres.in/api/users'); //promesa
+ }
+ 
+ 
+ function getJanet(){
+    return fetch('https://reqres.in/api/users/2'); //promesa
+ }
+
+    getUsers()
     .then(data => data.json())
     .then(users => {
         listadoUsuarios(users.data);
@@ -17,14 +27,6 @@ var div_janet = document.querySelector("janet");
         mostrarJanet(user.data);
     });
 
-    function getUsuarios(){
-        fetch('https://reqres.in/api/users'); //promesa
-    }
-
-    
-    function getJanet(){
-        fetch('https://reqres.in/api/users/2'); //promesa
-    }
 
     function listadoUsuarios(usuarios){
         usuarios.map((user, i) => {
@@ -39,9 +41,14 @@ var div_janet = document.querySelector("janet");
 
     function mostrarJanet(user){
             let nombre = document.createElement('h4');
+            let avatar = document.createElement('img');
             
-            nombre.innerHTML =  ". " + user.first_name + " " + user.last_name;
+            nombre.innerHTML = user.first_name + " " + user.last_name;
+            avatar.src = user.avatar; 
+            avatar.width = '150'; 
+
             div_janet.appendChild(nombre);
+            div_janet.appendChild(avatar);
 
             document.querySelector("#janet .loading").style.display = "none";
         }
