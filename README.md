@@ -1,2 +1,2 @@
 # Js
-ejercicios de práctica aprendiendo js
+Ejercicios de práctica aprendiendo js
